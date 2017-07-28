@@ -52,6 +52,7 @@ class Router{
                 {
                     $route['act'] = 'index';
                 }
+                $route['controller'] = self::upperCamelCase($route['controller']);
                 self::$route = $route;
                 return true;
             }
@@ -63,10 +64,10 @@ class Router{
     {
         if (self::matchRoutes($url))
         {
-            $controller = 'app\controllers\\' . self::upperCamelCase(self::$route['controller']);
+            $controller = 'app\controllers\\' . self::$route['controller'];
             if (class_exists($controller))
             {
-                $controllerObj = new $controller;
+                $controllerObj = new $controller(self::$route);
                 $act = self::lowerCamelCase(self::$route['act']) . 'Pub';
                 if (method_exists($controllerObj,$act))
                 {

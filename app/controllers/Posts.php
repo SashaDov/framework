@@ -8,8 +8,16 @@
  */
 namespace app\controllers;
 
-class Posts
+use vendor\core\base\Controller;
+
+class Posts extends Controller
 {
+
+    public function indexPub()
+    {
+        echo __CLASS__ . ' ';
+        echo __METHOD__;
+    }
 
     public function test()
     {
@@ -19,6 +27,7 @@ class Posts
 
     public function testPagePub()
     {
+        debug($this->route);
         echo __CLASS__ . ' ';
         echo __METHOD__;
     }
