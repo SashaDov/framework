@@ -1,0 +1,131 @@
+<?php
+namespace vendor\core;
+/**
+ * Class Router
+ * class reads a query_string, compare with this, find a match by pattern and direct user to a definite route
+ *
+ */
+
+class Router{
+
+    public static $routes = [];
+    public static $route = [];
+
+    /**
+     * @param $regex
+     * @param array $route
+     */
+    public static function collectRoutes($regex, $route = [])
+    {
+        self::$routes[$regex] = $route;
+    }
+
+    public  static function getRoutes()
+    {
+        return self::$routes;
+    }
+
+
+    public  static function getRoute()
+    {
+        return self::$route;
+    }
+
+    /**
+     * @param $url
+     * @return bool
+     */
+    protected static function matchRoutes($url)
+    {
+        foreach(self::$routes as $pattern => $route)
+        {
+            if(preg_match("#$pattern#i",$url,$matches))
+            {
+                foreach ($matches as $key => $value)
+                {
+                    if (is_string($key))
+                    {
+                        $route[$key] = $value;
+                    }
+                }
+                if (!isset($route['act']))
+                {
+                    $route['act'] = 'index';
+                }
+                self::$route = $route;
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static function dispatch($url)
+    {
+        if (self::matchRoutes($url))
+        {
+            $controller = 'app\controllers\\' . self::upperCamelCase(self::$route['controller']);
+            if (class_exists($controller))
+            {
+                $controllerObj = new $controller;
+                $act = self::lowerCamelCase(self::$route['act']) . 'Pub';
+                if (method_exists($controllerObj,$act))
+                {
+                    $controllerObj->$act();
+                }
+                else
+                {
+                    echo "Метод $controller::$act не существует";
+                }
+            }
+            else
+            {
+                echo "Контроллер $controller не существует";
+            }
+        }
+        else
+        {
+            http_response_code('404');
+            require_once "1.html";
+        }
+    }
+/*
+    protected static function upperCamelCase ($url_controller)
+    {
+        //jf-gfFF JfGfff example
+        $mas_controller = explode('-',$url_controller);
+        $new_mas_controller = "";
+        foreach ($mas_controller as $value)
+        {
+            $new_mas_controller[] = ucwords(strtolower($value));
+        }
+        $url_controller = join($new_mas_controller);
+        return $url_controller;
+    }
+*/
+    protected static function upperCamelCase ($url_controller)
+    {
+        $url_controller = str_replace('-',' ',$url_controller);
+        $url_controller = str_replace(' ','', ucwords(strtolower($url_controller)));
+        return $url_controller;
+    }
+
+    protected static function lowerCamelCase ($url_act)
+    {
+        $url_act = lcfirst(self::upperCamelCase($url_act));
+        return $url_act;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
