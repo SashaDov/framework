@@ -53,6 +53,7 @@ class Router{
                     $route['act'] = 'index';
                 }
                 $route['controller'] = self::upperCamelCase($route['controller']);
+                $route['act'] = self::lowerCamelCase($route['act']);
                 self::$route = $route;
                 return true;
             }
@@ -62,13 +63,14 @@ class Router{
 
     public static function dispatch($url)
     {
+        $url = self::treatmentQueryString($url);
         if (self::matchRoutes($url))
         {
             $controller = 'app\controllers\\' . self::$route['controller'];
             if (class_exists($controller))
             {
                 $controllerObj = new $controller(self::$route);
-                $act = self::lowerCamelCase(self::$route['act']) . 'Pub';
+                $act = self::$route['act'] . 'Pub';
                 if (method_exists($controllerObj,$act))
                 {
                     $controllerObj->$act();
@@ -114,6 +116,26 @@ class Router{
     {
         $url_act = lcfirst(self::upperCamelCase($url_act));
         return $url_act;
+    }
+
+    protected  static  function treatmentQueryString ($query_string)
+    {
+        if ($query_string)
+        {
+            $mas_from_qs = explode('&',$query_string);
+            if (false === strpos($mas_from_qs[0],'='))
+            {
+                return rtrim($mas_from_qs[0],'/');
+            }
+            else
+            {
+                return '';
+            }
+        }
+        else
+        {
+            return '';
+        }
     }
 
 

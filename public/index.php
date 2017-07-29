@@ -1,17 +1,10 @@
-<!doctype html>
-<html lang="ru-en">
-<head>
-	<meta charset="">
-	<title>Академия Аддерли</title>
-</head>
-<body>
-	<h1>ПРИВЕТ</h1>
     <?php
     error_reporting(-1);
 
     use vendor\core\Router;
 
-    $query = rtrim($_SERVER["QUERY_STRING"],'/'); //REQUEST_URI QUERY_STRING
+    $query = $_SERVER["QUERY_STRING"]; //REQUEST_URI QUERY_STRING
+
     define('WWW',__DIR__);
     define('APP',dirname(__DIR__) . '/app');
     define('CORE',dirname(__DIR__) . '/vendor/core');
@@ -28,15 +21,14 @@
         }
     });
 
-    //my routes
-    Router::collectRoutes("^pages/?(?P<act>[a-z-]+)?$", ['controller' => 'Posts','act' => 'test-page']);
+    //my routes for typical pages with changing only central content
+    Router::collectRoutes("^page/(?P<act>[a-z-]+)/(?P<alias>[a-z-]+)$", ['controller' => 'Page']);
+    Router::collectRoutes("^page/(?P<alias>[a-z-]+)$", ['controller' => 'Page','act' => 'view']);
 
     //default routes
     Router::collectRoutes("^(?P<controller>[a-z-]+)/?(?P<act>[a-z-]+)?$");
     Router::collectRoutes("^$", ['controller' => 'Main']);
-    debug(Router::getRoutes());
     Router::dispatch($query);
 
 
-    ?>
-</html>
+

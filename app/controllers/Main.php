@@ -7,7 +7,9 @@
  */
 namespace app\controllers;
 
-class Main{
+use vendor\core\base\Controller;
+
+class Main extends Controller {
 
     public function indexPub()
     {
