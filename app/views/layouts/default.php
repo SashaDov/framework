@@ -17,7 +17,6 @@
 <body>
 
 <div class="container">
-<h1>Hello, world!</h1>
 <h3><?=$content?></h3>
 </div>
 

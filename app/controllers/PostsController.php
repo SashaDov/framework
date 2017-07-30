@@ -9,7 +9,7 @@
 namespace app\controllers;
 
 
-class Posts extends Controllers
+class PostsController extends Controllers
 {
 
     public function indexPub()

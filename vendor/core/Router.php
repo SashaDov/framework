@@ -66,7 +66,7 @@ class Router{
         $url = self::treatmentQueryString($url);
         if (self::matchRoutes($url))
         {
-            $controller = 'app\controllers\\' . self::$route['controller'];
+            $controller = 'app\controllers\\' . self::$route['controller'] . 'Controller';
             if (class_exists($controller))
             {
                 $controllerObj = new $controller(self::$route);
@@ -128,15 +128,8 @@ class Router{
             {
                 return rtrim($mas_from_qs[0],'/');
             }
-            else
-            {
-                return '';
-            }
         }
-        else
-        {
-            return '';
-        }
+        return '';
     }
 
 

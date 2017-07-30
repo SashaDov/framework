@@ -10,7 +10,7 @@ namespace app\controllers;
 
 
 
-class Page extends Controllers
+class PageController extends Controllers
 {
     public function viewPub ()
     {

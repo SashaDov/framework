@@ -9,7 +9,7 @@
 
 namespace app\controllers;
 
-class PostNew extends Controllers
+class PostNewController extends Controllers
 {
     public function __construct()
     {
