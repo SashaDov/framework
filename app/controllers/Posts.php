@@ -8,9 +8,8 @@
  */
 namespace app\controllers;
 
-use vendor\core\base\Controller;
 
-class Posts extends Controller
+class Posts extends Controllers
 {
 
     public function indexPub()
@@ -27,7 +26,6 @@ class Posts extends Controller
 
     public function testPagePub()
     {
-        debug($this->route);
         echo __CLASS__ . ' ';
         echo __METHOD__;
     }

@@ -9,9 +9,9 @@
 
 namespace app\controllers;
 
-class PostNew
+class PostNew extends Controllers
 {
-    function __construct()
+    public function __construct()
     {
         echo __CLASS__;
     }

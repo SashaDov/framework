@@ -30,25 +30,52 @@ class View
      */
     public $layout;
 
-    public function __construct($route, $layout = "", $view = "")
+    public function __construct($route, $layout = "", $view)
     {
         $this->route = $route;
-        $this->layout = $layout ?: LAYOUT;
+        if ($layout === false)
+        {
+            $this->layout = false;
+        }
+        else
+        {
+            $this->layout = $layout ?: LAYOUT;
+        }
         $this->view = $view;
     }
 
-    public function render ()
+    public function render ($vars)
     {
+        if (is_array($vars))extract($vars);
+
         $file_view = APP . "/views/" . $this->route['controller'] ."/". $this->view .".php";
+        ob_start();
         if (is_file($file_view))
         {
             require_once $file_view;
         }
         else
         {
-            echo "не найден файл $file_view";
+            echo "не найден вид $file_view";
         }
+        $content = ob_get_clean();
 
+        if ($this->layout !== false)
+        {
+            $file_layout = APP . "/views/layouts/". $this->layout .".php";
+            if (is_file($file_layout))
+            {
+                require_once $file_layout;
+            }
+            else
+            {
+                echo "не найден шаблон $file_layout";
+            }
+        }
+        else
+        {
+            echo $content;
+        }
     }
 
 

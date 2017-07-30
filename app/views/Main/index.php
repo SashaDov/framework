@@ -1,18 +1,3 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: Галина
- * Date: 28.07.2017
- * Time: 13:57
- */
-?>
-<!doctype html>
-<html lang="ru-en">
-<head>
-	<meta charset="">
-	<title>index</title>
-</head>
-<body>
-<h1>Main:index</h1>
-</body>
-</html>
+
+Main:index - информация из вида
+<code><?=__FILE__?></code>

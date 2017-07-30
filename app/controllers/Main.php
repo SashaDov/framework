@@ -7,14 +7,21 @@
  */
 namespace app\controllers;
 
-use vendor\core\base\Controller;
 
-class Main extends Controller {
+class Main extends Controllers {
+
+    public $layout = 'main';
 
     public function indexPub()
     {
+        $this->layout = "default";
+       // $this->layout = false;
+        $this->view = "test";
         echo __CLASS__ . ' ';
-        echo __METHOD__;
+        echo __METHOD__ . 'информация из индекс акта контроллера мэйн';
+        $name = "Петя";
+        $message = 'good morning';
+        $this->setVariables(compact('name','message'));
     }
 
 }

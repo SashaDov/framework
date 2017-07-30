@@ -22,6 +22,11 @@ abstract class Controller
      */
     public $layout;
 
+    /**
+     * variables from users
+     * @var array
+     */
+    public $variables = [];
 
     public function __construct($mas_route)
     {
@@ -33,6 +38,30 @@ abstract class Controller
     public function getView ()
     {
         $viewObj = new View($this->route,$this->layout,$this->view);
-        $viewObj->render();
+        $viewObj->render($this->variables);
     }
+
+    /**
+     * F_set collect variables from users /=>render()/
+     * @param $vars
+     */
+    public function setVariables ($vars)
+    {
+        $this->variables = $vars;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
