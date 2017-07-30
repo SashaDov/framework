@@ -16,7 +16,7 @@ class Page extends Controller
     public function viewPub ()
     {
         debug($this->route);
-        debug($_GET);
+        debug($_POST);
         echo $_GET['f'];
         echo " pageView";
     }

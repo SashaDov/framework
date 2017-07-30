@@ -13,12 +13,26 @@ abstract class Controller
 {
 
     public $route = [];
+
     public $view;
+
+    /**
+     * current pattern
+     * @var string
+     */
+    public $layout;
+
 
     public function __construct($mas_route)
     {
         $this->route = $mas_route;
-        //$this->view = $mas_route['act'];
-        //require_once APP . "/views/".$mas_route['controller']."/{$this->view}.php";
+        $this->view = $mas_route['act'];
+
+    }
+
+    public function getView ()
+    {
+        $viewObj = new View($this->route,$this->layout,$this->view);
+        $viewObj->render();
     }
 }
