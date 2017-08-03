@@ -27,12 +27,44 @@ class MainController extends Controllers {
         //$message = 'good morning';
 
         $model = new Main;
-        //$sql = "INSERT posts (thema,published_data) VALUES ('second article', NOW())";
-        //$res = $model->execAddModel($sql);
-        $articles = $model->findAll();
-        $this->setVariables(compact('articles'));
-        debug($articles);
+        $field1 = "thema";
+        $field3 = "published_data";
+        $f1 = "five thema";
+        $f3 = "12-04-17 22:14:09";
+        $sql = "INSERT posts ($field1, $field3) VALUES (:$field1, :$field3)";
+        $res = $model->findBySql($sql,[$field1 => $f1,$field3 => $f3],'no');
+        var_dump($res);
+
+        //$sql = "SELECT * FROM $model->table WHERE $field1 LIKE :$field1 AND $field3=:$field3";
+
+        //$res = $model->findBySql($sql,[$field1 => $f1,$field3 => $f3]); //$field1 => 'second article',
+        //debug($res);
+
+        //$articles = $model->findAll();
+        //$this->setVariables(compact('articles'));
+        //debug($articles);
+
+        //$article = $model->findOne('second article');
+        //debug($article);
 
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }

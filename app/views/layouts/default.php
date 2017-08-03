@@ -18,6 +18,8 @@
 
 <div class="container">
 <h3><?=$content?></h3>
+    <?= debug(vendor\core\Db::$countSql) ?>
+    <?= debug(\vendor\core\Db::$queriesAll) ?>
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>

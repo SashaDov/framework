@@ -8,10 +8,11 @@
     define('WWW',__DIR__);
     define('APP',dirname(__DIR__) . '/app');
     define('CORE',dirname(__DIR__) . '/vendor/core');
+    define('LIBS',dirname(__DIR__) . '/vendor/libs');
     define('ROOT',dirname(__DIR__));
     define('LAYOUT','default');
 
-    require "../vendor/libs/functions";
+    require LIBS . "/functions";
 
     spl_autoload_register(function ($class)
     {
@@ -21,6 +22,8 @@
             require_once $file;
         }
     });
+
+
 
     //my routes for typical pages with changing only central content
     Router::collectRoutes("^page/(?P<act>[a-z-]+)/(?P<alias>[a-z-]+)$", ['controller' => 'Page']);
