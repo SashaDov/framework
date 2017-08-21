@@ -11,6 +11,11 @@ namespace vendor\core;
 
 use vendor\core\base\Registry;
 
+/**
+ * Class Component
+ * inherit from Registry class
+ * @package vendor\core
+ */
 class Component
 {
 

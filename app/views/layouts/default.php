@@ -7,6 +7,9 @@
     <title>Default Template</title>
 
     <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="/bootstrap/js/tether.min.js"></script>
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
 
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -22,8 +25,7 @@
     <?= debug(\vendor\core\Db::$queriesAll) ?>
 </div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="/bootstrap/js/tether.min.js"></script>
-<script src="/bootstrap/js/bootstrap.min.js"></script>
+
+
 </body>
 </html>

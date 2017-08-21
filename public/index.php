@@ -2,6 +2,7 @@
     error_reporting(-1);
 
     use vendor\core\Router;
+    use vendor\core\Component;
 
     $query = $_SERVER["QUERY_STRING"]; //REQUEST_URI QUERY_STRING
 
@@ -10,6 +11,7 @@
     define('CORE',dirname(__DIR__) . '/vendor/core');
     define('LIBS',dirname(__DIR__) . '/vendor/libs');
     define('ROOT',dirname(__DIR__));
+    define('CACHE',dirname(__DIR__) . '/temp/cache');
     define('LAYOUT','default');
 
     require LIBS . "/functions";
@@ -23,7 +25,8 @@
         }
     });
 
-
+    //making auto objects from config.php in time of loading main page
+    new Component();
 
     //my routes for typical pages with changing only central content
     Router::collectRoutes("^page/(?P<act>[a-z-]+)/(?P<alias>[a-z-]+)$", ['controller' => 'Page']);
